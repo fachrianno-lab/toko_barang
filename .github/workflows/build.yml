@@ -2,34 +2,34 @@ name: Build APK
 
 on:
   push:
-    branches: [ main]
-  workflows_dispatch:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -name: Ambil kode
-       uses: actions/checkout@v4
+      - name: Ambil kode
+        uses: actions/checkout@v4
 
-      -name: Pasang Java
+      - name: Pasang Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      -name: Pasang Flutter
+      - name: Pasang Flutter
         uses: subosito/flutter-action@v2
         with:
           channel: stable
 
-      -name: Install dependency
+      - name: Install dependency
         run: flutter pub get
 
-      -name: Build APK
+      - name: Build APK
         run: flutter build apk --release
 
-      -name: Upload APK
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: aplikasi-apk
